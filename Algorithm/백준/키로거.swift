@@ -7,7 +7,7 @@
 
 import Foundation
 
-func soulution() {
+func solution() {
     var leftStack: [String] = []
     var rightStack: [String] = []
     let readline = readLine()!.split(separator: " ").map{ String($0) }
