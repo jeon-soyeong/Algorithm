@@ -1,5 +1,5 @@
 //
-//  구명조끼.swift
+//  구명보트.swift
 //  Algorithm
 //  - 그리디
 //  Created by 전소영 on 2021/04/09.
