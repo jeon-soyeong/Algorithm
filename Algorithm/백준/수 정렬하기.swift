@@ -7,7 +7,8 @@
 
 import Foundation
 
-func solution() {
+//선택정렬
+func selctionSorting() {
     let readline = readLine()!.split(separator: " ").map{ Int($0)! }
     let testCases = readline[0]
     var sortingArray: [Int] = []
@@ -32,3 +33,30 @@ func solution() {
       print(element)
     }
 }
+
+//삽입정렬
+func insertionSorting(){
+    let readline = readLine()!.split(separator: " ").map{ Int($0)! }
+    let testCases = readline[0]
+    var sortingArray: [Int] = []
+    var temp = 0
+    
+    for _ in 0..<testCases {
+        let readline = readLine()!.split(separator: " ").map{ Int($0)! }
+        sortingArray.append(readline[0])
+    }
+    
+    var a = sortingArray
+    for x in 1..<a.count {
+        var y = x
+        while y > 0 && a[y] < a[y - 1] {
+            a.swapAt(y - 1, y)
+            y -= 1
+        }
+    }
+    
+    for element in a {
+      print(element)
+    }
+}
+
