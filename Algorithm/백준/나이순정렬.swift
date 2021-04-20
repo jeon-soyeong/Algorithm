@@ -9,7 +9,7 @@ import Foundation
 
 func ageSorting() {
     let count = Int(readLine()!)!
-    var array = [(id: Int, age: Int, name: String)]()
+    var array: [(id: Int, age: Int, name: String)] = []
 
     for i in 0..<count {
         let input = readLine()!.split(separator: " ")
