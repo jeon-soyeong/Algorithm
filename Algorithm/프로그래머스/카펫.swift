@@ -7,24 +7,39 @@
 
 import Foundation
 
-func solution(_ brown: Int, _ yellow: Int) -> [Int] {
-    var resultArray: [(Int, Int)] = []
-    var result: [Int] = []
-    
-    for i in 1...yellow {
-        if yellow % i == 0, (i + 2) * ((yellow / i) + 2) == brown + yellow {
-            resultArray.append((i + 2, yellow / i + 2))
+func carpet(_ brown: Int, _ yellow: Int) -> [Int] {
+    let sum = brown + yellow
+    var x: Int = 0
+    var y: Int = 0
+    for i in 1...sum{
+        if sum % i == 0{
+            x = sum / i
+            y = i
+        }
+        if (x - 2) * (y - 2) == yellow {
             break
         }
     }
     
-    if resultArray[0].0 > resultArray[0].1 {
-        result.append(resultArray[0].0)
-        result.append(resultArray[0].1)
-    } else {
-        result.append(resultArray[0].1)
-        result.append(resultArray[0].0)
-    }
+    return [x, y]
     
-    return result
+//    var resultArray: [(Int, Int)] = []
+//    var result: [Int] = []
+//
+//    for i in 1...yellow {
+//        if yellow % i == 0, (i + 2) * ((yellow / i) + 2) == brown + yellow {
+//            resultArray.append((i + 2, yellow / i + 2))
+//            break
+//        }
+//    }
+//
+//    if resultArray[0].0 > resultArray[0].1 {
+//        result.append(resultArray[0].0)
+//        result.append(resultArray[0].1)
+//    } else {
+//        result.append(resultArray[0].1)
+//        result.append(resultArray[0].0)
+//    }
+//
+//    return result
 }
