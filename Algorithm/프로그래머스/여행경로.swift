@@ -7,30 +7,38 @@
 
 import Foundation
 
-func findCourse(_ tickets: inout [[String]], _ visited: inout [Bool], _ destination: String, _ course: [String]) -> [String] {
-    if course.count == tickets.count + 1 {
-        return course
-    }
+//tickets                                             return
+//[["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]    ["ICN", "JFK", "HND", "IAD"]
+//[["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]
+//["ICN", "ATL", "ICN", "SFO", "ATL", "SFO"]
+//["ICN", "A"], ["ICN", "B"], ["B", "ICN"]]
+
+func solution(_ tickets: [[String]]) -> [String] {
+    //  ["JFK", "HND"], ["HND", "IAD"], ["ICN", "JFK"]
+    let tickets = tickets.sorted { $0[1] < $1[1] }
+    var visited = Array(repeating: false, count: tickets.count)
+    var result: [String] = []
     
-    for (index, ticket) in tickets.enumerated() {
-        if ticket[0] == destination && visited[index] == false {
-            visited[index] = true
-            var newCourse = course
-            newCourse.append(ticket[1])
-            let result = findCourse(&tickets, &visited, ticket[1], newCourse)
-            
-            if !result.isEmpty {
-                return result
+    func dfs(startingPoint: String) {
+        if result.count == tickets.count {
+            result.append(startingPoint)
+            return
+        }
+        
+        for i in 0..<tickets.count {
+            if tickets[i][0] == startingPoint, !visited[i] {
+                visited[i] = true
+                result.append(startingPoint)
+                dfs(startingPoint: tickets[i][1])
+                if result.count == tickets.count + 1 {
+                    return
+                }
+                result.removeLast()
+                visited[i] = false
             }
         }
     }
     
-    return []
-}
-
-func solution(_ tickets: [[String]]) -> [String] {
-    var tickets = tickets.sorted(by: { $0[1] < $1[1] })
-    var visited = Array(repeating: false, count: tickets.count)
- 
-    return findCourse(&tickets, &visited, "ICN", ["ICN"])
+    dfs(startingPoint: "ICN")
+    return result
 }
