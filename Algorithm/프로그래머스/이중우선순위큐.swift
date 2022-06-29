@@ -8,28 +8,30 @@
 import Foundation
 
 func solution(_ operations: [String]) -> [Int] {
-    var returnArray: [Int] = []
-    let operations = operations.map { $0.components(separatedBy: " ") }
+    var result: [Int] = []
+    var queue: [Int] = []
     
-    for operation in operations {
-        let splitOperation = operation[0]
+    for i in 0..<operations.count {
+        let operation = operations[i].split(separator: " ")
+        let operators = operation[0]
         let number = Int(operation[1])!
         
-        switch splitOperation {
+        switch operators {
         case "I":
-            returnArray.append(number)
+            queue.append(number)
         case "D":
-            if !returnArray.isEmpty {
+            if queue.isEmpty == false {
                 if number == 1 {
-                    returnArray.sort(by: >)
+                    queue.sort(by: >)
                 } else {
-                    returnArray.sort()
+                    queue.sort(by: <)
                 }
-                returnArray.removeFirst() }
+                queue.removeFirst()
+            }
         default:
             break
         }
     }
-
-    return returnArray == [] ? [0,0] : [returnArray.max()!,returnArray.min()!]
+    
+    return [queue.max() ?? 0, queue.min() ?? 0]
 }
