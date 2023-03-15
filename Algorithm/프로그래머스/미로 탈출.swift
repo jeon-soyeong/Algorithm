@@ -34,7 +34,7 @@ func solution159993(_ maps: [String]) -> Int {
     let row = mapArray.count
     let dx = [0, 0, 1, -1]
     let dy = [-1, 1, 0, 0]
-    
+
     func bfs(_ from: (Int, Int), _ to: (Int, Int)) -> Int {
         var distance: [[Int]] = Array(repeating: [Int](repeating: -1, count: column), count: row)
         var queue: [(Int, Int)] = [(from.0, from.1)]
@@ -58,7 +58,7 @@ func solution159993(_ maps: [String]) -> Int {
 
     let sToL = bfs(start, lever)
     let LtoE = bfs(lever, end)
-    
+
     if sToL == -1 || LtoE == -1 {
         return -1
     }
