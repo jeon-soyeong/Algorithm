@@ -19,17 +19,15 @@ func solution150369(_ cap: Int, _ n: Int, _ deliveries: [Int], _ pickups: [Int])
     var answer = 0
     
     for i in 0..<n {
-        if deliveries[i] != 0 || pickups[i] != 0 {
-            var count = 0
-            while d < deliveries[i] || p < pickups[i] {
-                count += 1
-                d += cap
-                p += cap
-            }
-            d -= deliveries[i]
-            p -= pickups[i]
-            answer += (n - i) * 2 * count
+        var count = 0
+        while d < deliveries[i] || p < pickups[i] {
+            count += 1
+            d += cap
+            p += cap
         }
+        d -= deliveries[i]
+        p -= pickups[i]
+        answer += (n - i) * 2 * count
     }
 
     return Int64(answer)
