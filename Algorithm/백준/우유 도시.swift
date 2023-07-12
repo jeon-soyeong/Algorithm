@@ -15,7 +15,7 @@ import Foundation
 // == 5
 func solution14722() {
     let n = Int(readLine()!)!
-    let direction = [[0,1], [1,0]]
+    let direction = [[0, 1], [1, 0]]
     var dp = Array(repeating: Array(repeating: Array(repeating: 0, count: 3), count: n), count: n)
     var milkArray: [[Int]] = []
     
