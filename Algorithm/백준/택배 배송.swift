@@ -86,7 +86,6 @@ func solution5972() {
             }
 
             for i in graph[node] {
-
                 if visited[i.0] > i.1 + time {
                     visited[i.0] = i.1 + time
                     heap.insert((i.0, i.1 + time))
