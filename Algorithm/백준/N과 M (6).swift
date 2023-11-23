@@ -17,7 +17,7 @@ import Foundation
 //8 9
 func solution15655() {
     let nm = readLine()!.split(separator: " ").map { Int(String($0))! }
-    let (n, m) = (nm[0], nm[1])
+    let m = nm[1]
     var array = readLine()!.split(separator: " ").map { Int(String($0))! }
     array.sort()
     var answer: [Int] = []
@@ -37,5 +37,5 @@ func solution15655() {
         }
     }
     
-    back(array.first!)
+    back(0)
 }
