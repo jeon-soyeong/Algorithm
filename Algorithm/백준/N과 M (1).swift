@@ -33,7 +33,7 @@ func solution15649() {
     
     func back() {
         if answer.count == m {
-            print(answer.map{ String($0) }.joined(separator: " "))
+            print(answer.map { String($0) }.joined(separator: " "))
             return
         }
         
