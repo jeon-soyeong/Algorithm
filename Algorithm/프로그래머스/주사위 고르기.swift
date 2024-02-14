@@ -17,39 +17,16 @@ func solution258709(_ dice: [[Int]]) -> [Int] {
     var diceBSums: [Int] = []
     var maxWin = 0
     
-    combination(Array(1...dice.count), dice.count / 2, [], 0)
-    
-    for diceA in diceCombinations {
-        let diceB = Array(1...dice.count).filter { !diceA.contains($0) }
-        
-        diceASums = getSum(diceA)
-        diceBSums = getSum(diceB).sorted()
-        
-        var win = 0
-        
-        for diceASum in diceASums {
-            var start = 0, end = diceBSums.count
-            
-            while start < end {
-                var mid = (start + end) / 2
-                
-                if diceBSums[mid] < diceASum {
-                    start = mid + 1
-                } else {
-                    end = mid
-                }
-            }
-            
-            win += end
+    func combination(_ array: [Int], _ target: Int, _ temp: [Int], _ index: Int) {
+        if temp.count == target {
+            diceCombinations.append(temp)
+            return
         }
         
-        if maxWin <= win {
-            maxWin = win
-            answer = diceA
+        for i in index..<array.count {
+            combination(array, target, temp + [array[i]], i + 1)
         }
     }
-    
-    return answer
     
     func getSum(_ d: [Int]) -> [Int] {
         var sums: [Int] = []
@@ -69,14 +46,37 @@ func solution258709(_ dice: [[Int]]) -> [Int] {
         return sums
     }
     
-    func combination(_ array: [Int], _ target: Int, _ temp: [Int], _ index: Int) {
-        if temp.count == target {
-            diceCombinations.append(temp)
-            return
+    combination(Array(1...dice.count), dice.count / 2, [], 0)
+    
+    for diceA in diceCombinations {
+        let diceB = Array(1...dice.count).filter { !diceA.contains($0) }
+        
+        diceASums = getSum(diceA)
+        diceBSums = getSum(diceB).sorted()
+        
+        var win = 0
+        
+        for diceASum in diceASums {
+            var start = 0, end = diceBSums.count
+            
+            while start < end {
+                let mid = (start + end) / 2
+                
+                if diceBSums[mid] < diceASum {
+                    start = mid + 1
+                } else {
+                    end = mid
+                }
+            }
+            
+            win += end
         }
         
-        for i in index..<array.count {
-            combination(array, target, temp + [array[i]], i + 1)
+        if maxWin <= win {
+            maxWin = win
+            answer = diceA
         }
     }
+    
+    return answer
 }
