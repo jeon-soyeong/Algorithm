@@ -35,7 +35,7 @@ func solution2159() {
             
             for k in 0..<5 {
                 let bx = tuple[i - 1][0] + dx[k], by = tuple[i - 1][1] + dy[k]
-                dp[i][j] = min(dp[i][j], abs(ex - x) + abs(ey - y) + dp[i - 1][k])
+                dp[i][j] = min(dp[i][j], abs(bx - x) + abs(by - y) + dp[i - 1][k])
             }
         }
     }
